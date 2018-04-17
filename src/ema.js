@@ -31,4 +31,18 @@ const ema = windowSize => {
   }
 }
 
+const ema816 = (data, key) => {
+  const closes = data.map(({[key]: value}) => value)
+  const ema8 = ema(8) // 8 15min periods is 2 hrs
+  const ema8data = ema8(closes)
+  const ema16 = ema(16) // 16 15min periods is 4 hrs
+  const ema16data = ema16(closes)
+  return data.map((e,i) => {
+    e.ema1 = ema8data[i]
+    e.ema2 = ema16data[i]
+    return e
+  })
+
+}
 module.exports.ema = ema
+module.exports.ema816 = ema816

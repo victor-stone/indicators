@@ -35,7 +35,23 @@ var ema = function ema(windowSize) {
   };
 };
 
+var ema816 = function ema816(data, key) {
+  var closes = data.map(function (_ref) {
+    var value = _ref[key];
+    return value;
+  });
+  var ema8 = ema(8); // 8 15min periods is 2 hrs
+  var ema8data = ema8(closes);
+  var ema16 = ema(16); // 16 15min periods is 4 hrs
+  var ema16data = ema16(closes);
+  return data.map(function (e, i) {
+    e.ema1 = ema8data[i];
+    e.ema2 = ema16data[i];
+    return e;
+  });
+};
 module.exports.ema = ema;
+module.exports.ema816 = ema816;
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
