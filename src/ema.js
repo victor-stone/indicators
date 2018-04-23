@@ -32,7 +32,7 @@ const ema = windowSize => {
 }
 
 const ema816 = (data, key) => {
-  const closes = data.map(({[key]: value}) => value)
+  const closes = key ? data.map(({[key]: value}) => value) : data
   const ema8 = ema(8) // 8 15min periods is 2 hrs
   const ema8data = ema8(closes)
   const ema16 = ema(16) // 16 15min periods is 4 hrs
